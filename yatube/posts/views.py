@@ -61,8 +61,6 @@ def post_create(request):
         form = PostForm(request.POST)
         if form.is_valid():
             post = form.save(commit=False)
-            post.text = form.cleaned_data['text']
-            post.group = form.cleaned_data['group']
             post.author = request.user
             post.save()
         return redirect(f'/profile/{request.user}/')
