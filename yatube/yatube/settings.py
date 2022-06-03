@@ -1,19 +1,37 @@
 import os
 
+ALLOWED_HOSTS = []
+
+AUTH_PASSWORD_VALIDATORS = [
+    {
+        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+    },
+    {
+        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+    },
+    {
+        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
+    },
+    {
+        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
+    },
+]
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
-STATIC_URL = '/static/'
-
-STATICFILES_DIRS = os.path.join(BASE_DIR, 'static'),
-
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '=t6&q$ovp$o!i5s9269o^0s0co&)@3+@dv4p3upy*o8sqtqe(2'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    }
+}
+
+EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
+
+EMAIL_FILE_PATH = os.path.join(BASE_DIR, 'sent_emails')
 
 INSTALLED_APPS = [
     'posts.apps.PostsConfig',  # Добавлено 23.02.2022
@@ -28,6 +46,12 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 ]
 
+LANGUAGE_CODE = 'ru'
+
+LOGIN_URL = 'users:login'
+
+LOGIN_REDIRECT_URL = 'posts:index'
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -39,6 +63,13 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'yatube.urls'
+
+STATIC_URL = '/static/'
+
+STATICFILES_DIRS = os.path.join(BASE_DIR, 'static'),
+
+# SECURITY WARNING: keep the secret key used in production secret!
+SECRET_KEY = '=t6&q$ovp$o!i5s9269o^0s0co&)@3+@dv4p3upy*o8sqtqe(2'
 
 TEMPLATES_DIR = os.path.join(BASE_DIR, 'templates')  # Добавлено 25.02.2022
 
@@ -59,32 +90,6 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'yatube.wsgi.application'
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
-}
-
-AUTH_PASSWORD_VALIDATORS = [
-    {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
-    },
-]
-
-LANGUAGE_CODE = 'ru'
-
 TIME_ZONE = 'UTC'
 
 USE_I18N = True
@@ -93,10 +98,4 @@ USE_L10N = True
 
 USE_TZ = True
 
-LOGIN_URL = 'users:login'
-
-LOGIN_REDIRECT_URL = 'posts:index'
-
-EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
-
-EMAIL_FILE_PATH = os.path.join(BASE_DIR, 'sent_emails')
+WSGI_APPLICATION = 'yatube.wsgi.application'
