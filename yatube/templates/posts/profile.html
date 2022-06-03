@@ -1,32 +1,46 @@
 {% extends "base.html" %}
 
-{% block title %} Профиль пользователя {% endblock %}
+{% block title %} 
+  Профиль пользователя 
+  {% if author.get_full_name %}
+    {{ author.get_full_name }} 
+  {% else %}
+    {{ author.username }}
+  {% endif %}
+{% endblock %}
 
 {% block content %}
-    <main>
-      <div class="container py-5">        
-        <h1>Все посты пользователя <!--Лев Толстой--> </h1>
-        <h3>Всего постов: <!-- --> </h3>   
-        <article>
-          <ul>
-            <li>
-              Автор: <!--Лев Толстой-->
-              <a href="<!-- -->">все посты пользователя</a>
-            </li>
-            <li>
-              Дата публикации: <!-- 31 июля 1854 --> 
-            </li>
-          </ul>
-          <p>
-          <!-- Толстовская ерунда --> 
-          </p>
-          <a href="<!-- -->">подробная информация </a>
-        </article>       
-        <a href="<!-- -->">все записи группы</a>        
-        <hr>
-        <!-- Остальные посты. после последнего нет черты -->
-        <!-- Здесь подключён паджинатор -->
-        {% include 'posts/includes/paginator.html' %}
-      </div>
-    </main>
-{% block content %}
+<div class="container py-5">
+  <h1>Все посты пользователя 
+    {% if author.get_full_name %}
+      {{ author.get_full_name }} 
+    {% else %}
+      {{ author.username }}
+    {% endif %} </h1>
+  <h3>Всего постов: {{ amount }} </h3>   
+  {% for post in page_obj %}          
+    <article>
+      <ul>
+        <li>
+          Автор: 
+          <a href="{% url 'posts:profile' post.author %}">
+            {{ post.author.get_full_name }}
+          </a>
+        </li>
+        <li>
+          Дата публикации: {{ post.pub_date|date:"d E Y" }}
+        </li>
+      </ul>
+      <p>
+        {{ post.text|linebreaksbr }}
+      </p>
+      <a href="{% url 'posts:post_detail' post.id %}">подробная информация </a>
+    </article>       
+    {% if post.group %}   
+      <a href="{% url 'posts:group_list' post.group.slug %}">все записи группы</a>
+    {% endif %}
+    {% if not forloop.last %}<hr>{% endif %}
+  {% endfor %}
+  {% include 'posts/includes/paginator.html' %}        
+</div>
+{% endblock %}
