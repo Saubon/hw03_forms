@@ -24,7 +24,7 @@
                   {% endfor %}
               {% endif %}
 
-              <form method="post" action="{% url 'users:signup.html' %}">
+              <form method="post" action="{% url 'auth:signup.html' %}">
               {% csrf_token %}
 
               {% for field in form %} 
