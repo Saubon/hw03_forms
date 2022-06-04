@@ -24,6 +24,9 @@
                       Текст нового поста
                     </small>                  
                   </div>            
+                  {% if post.group %}   
+                    <a href="{% url 'posts:group_list' post.group.slug %}">все записи группы</a>
+                  {% endif %} 
                   <div class="form-group row my-3 p-3">
                     <label for="id_group">
                       Group                  
