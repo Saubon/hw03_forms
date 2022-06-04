@@ -26,6 +26,7 @@ def index(request):
 
 
 def group_posts(request, slug):
+    template = 'posts/group_list.html'
     group = get_object_or_404(Group, slug=slug)
     posts = group.posts.all()[:10]
     context = {
@@ -33,25 +34,27 @@ def group_posts(request, slug):
         'posts': posts,
     }
     context.update(get_page_context(group.posts.all(), request))
-    return render(request, 'posts/group_list.html', context)
+    return render(request, template, context)
 
 
 def profile(request, username):
+    template = 'posts/profile.html'
     author = get_object_or_404(User, username=username)
     context = {
         'author': author,
     }
     context.update(get_page_context(author.posts.all(), request))
-    return render(request, 'posts/profile.html', context)
+    return render(request, template, context)
 
 
 def post_detail(request, post_id):
+    template = 'posts/post_detail.html'
     post = get_object_or_404(Post, pk=post_id)
     context = {
         'post': post,
     }
-    context.update(get_page_context(post_id.post.all(), request))
-    return render(request, 'posts/post_detail.html', context)
+    context.update(get_page_context(post.post.all(), request))
+    return render(request, template, context)
 
 
 @login_required
