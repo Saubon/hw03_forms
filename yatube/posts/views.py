@@ -46,11 +46,11 @@ def profile(request, username):
 
 
 def post_detail(request, post_id):
-    posts = get_object_or_404(Post, pk=post_id)
+    post = get_object_or_404(Post, pk=post_id)
     context = {
-        'posts': posts,
+        'post': post,
     }
-    context.update(get_page_context(post_id.posts.all(), request))
+    context.update(get_page_context(post_id.post.all(), request))
     return render(request, 'posts/post_detail.html', context)
 
 
