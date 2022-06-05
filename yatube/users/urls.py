@@ -13,8 +13,7 @@ app_name = 'users'
 
 urlpatterns = [
     path('signup/',
-        views.SignUp
-        .as_view(template_name='users/signup.html'),
+        views.SignUp.as_view(template_name='users/signup.html'),
         name='signup'
     ),
     path(
