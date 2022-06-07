@@ -53,7 +53,7 @@ def post_detail(request, post_id):
     context = {
         'post': post,
     }
-    context.update(get_page_context(request))
+    context.update(get_page_context)
     return render(request, template, context)
 
 
