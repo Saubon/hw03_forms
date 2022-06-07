@@ -69,7 +69,10 @@ def post_create(request):
             return redirect(f'/profile/{post.author}/')
         else:
             form = PostForm()
-    return render(request, template, form)
+            context = {
+                'form': form,
+            }
+    return render(request, template, context)
 
 
 @login_required
