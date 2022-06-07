@@ -60,9 +60,6 @@ def post_detail(request, post_id):
 @login_required
 def post_create(request):
     template = 'posts/create_post.html'
-    context = {
-        'form': form,
-    }
     if request.method == 'POST':
         form = PostForm(request.POST)
         if form.is_valid():
@@ -72,7 +69,7 @@ def post_create(request):
             return redirect(f'/profile/{post.author}/')
         else:
             form = PostForm()
-    return render(request, template, context)
+    return render(request, template, form)
 
 
 @login_required
