@@ -12,51 +12,51 @@
 
             <li class="nav-item"> 
               <a class="nav-link 
-                {% if view_name  == 'about:author' %} active {% endif %}" 
+                {% if view_name  == 'about:author' %} active {% endif %}"
                   href="{% url 'about:author' %}"> Об авторе </a>
             </li>
 
             <li class="nav-item">
               <a class="nav-link 
-                {% if view_name  == 'about:tech' %} active {% endif %}" 
+                {% if view_name  == 'about:tech' %} active {% endif %}"
                   href="{% url 'about:tech' %}"> Технологии </a>
             </li>
 
         {% if request.user.is_authenticated %}
 
-          <li class="nav-item"> 
-            <a class="nav-link 
-              {% if view_name  == 'posts:post_create' %} active {% endif %}" 
-                href="{% url 'posts:create_post' %}"> Новая запись </a>
-          </li>
+            <li class="nav-item"> 
+              <a class="nav-link 
+                {% if view_name  == 'posts:post_create' %} active {% endif %}"
+                  href="{% url 'posts:create_post' %}"> Новая запись </a>
+            </li>
 
-          <li class="nav-item"> 
-            <a class="nav-link 
-              {% if view_name  == 'users:password_change' %} active {% endif %}" 
-                href="{% url 'users:pass_change_view' %}"> Изменить пароль </a>
-          </li>
+            <li class="nav-item"> 
+              <a class="nav-link 
+                {% if view_name  == 'users:password_change' %} active {% endif %}"
+                  href="{% url 'users:pass_change_view' %}"> Изменить пароль </a>
+            </li>
 
-          <li class="nav-item"> 
-            <a class="nav-link 
-              {% if view_name  == 'users:logout' %} active {% endif %}" 
-                href="{% url 'users:logout' %}"> Выйти </a>
-          </li>
+            <li class="nav-item"> 
+              <a class="nav-link 
+                {% if view_name  == 'users:logout' %} active {% endif %}"
+                  href="{% url 'users:logout' %}"> Выйти </a>
+            </li>
 
-          <li> Пользователь: {{ user.username }} </li>
+            <li> Пользователь: {{ user.username }} </li>
 
         {% else %}
 
-          <li class="nav-item"> 
-            <a class="nav-link 
-              {% if view_name  == 'auth:login' %} active {% endif %}" 
-                href="{% url 'auth:login' %}"> Войти </a>
-          </li>
+            <li class="nav-item"> 
+              <a class="nav-link 
+                {% if view_name  == 'auth:login' %} active {% endif %}" 
+                  href="{% url 'auth:login' %}"> Войти </a>
+            </li>
 
-          <li class="nav-item"> 
-            <a class="nav-link 
-              {% if view_name  == 'auth:signup' %} active {% endif %}" 
-                href="{% url 'auth:signup' %}"> Регистрация </a>
-          </li>
+            <li class="nav-item"> 
+              <a class="nav-link 
+                {% if view_name  == 'auth:signup' %} active {% endif %}" 
+                  href="{% url 'auth:signup' %}"> Регистрация </a>
+            </li>
 
         {% endif %}
 
