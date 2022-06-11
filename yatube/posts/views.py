@@ -31,7 +31,6 @@ def group_posts(request, slug):
     posts = group.posts.all()[:10]
     context = {
         'group': group,
-        'posts': posts,
     }
     context.update(get_page_context(group.posts.all(), request))
     return render(request, template, context)
