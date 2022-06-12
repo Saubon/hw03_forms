@@ -37,7 +37,7 @@
     </aside>
 
     {% if post.author == user %}
-      <a class="btn btn-primary" href="posts:update_post">
+      <a class="btn btn-primary" href={% url "posts:update_post" %}>
         Редактировать запись
       </a>
     {% endif %}

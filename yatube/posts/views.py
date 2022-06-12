@@ -22,14 +22,14 @@ def get_page_context(queryset, request):
 
 def index(request):
     template = 'posts/index.html'
-    context = get_page_context(Post.objects.all(), request)
+    context = get_page_context(Post.objects.all().order_by('-pub_date'), request)
     return render(request, template, context)
 
 
 def group_posts(request, slug):
     template = 'posts/group_list.html'
     group = get_object_or_404(Group, slug=slug)
-    posts = group.posts.all()[:10]
+    posts = group.posts.all().order_by('-pub_date')
     context = {
         'posts': posts,
         'group': group,
