@@ -22,7 +22,9 @@ def get_page_context(queryset, request):
 
 def index(request):
     template = 'posts/index.html'
-    context = get_page_context(Post.objects.all().order_by('-pub_date'), request)
+    context = get_page_context(
+        Post.objects.all().order_by('-pub_date'), request
+    )
     return render(request, template, context)
 
 
