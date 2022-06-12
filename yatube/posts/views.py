@@ -21,8 +21,9 @@ def get_page_context(queryset, request):
 
 
 def index(request):
+    template = 'posts/index.html'
     context = get_page_context(Post.objects.all(), request)
-    return render(request, 'posts/index.html', context)
+    return render(request, template, context)
 
 
 def group_posts(request, slug):
@@ -58,13 +59,16 @@ def post_detail(request, post_id):
 
 @login_required
 def post_create(request):
+    template = 'posts/create_post.html'
     form = PostForm(request.POST or None)
-    if not form.is_valid():
-        return render(request, 'posts/create_post.html', {'form': form})
-    post = form.save(commit=False)
-    post.author = request.user
-    post.save()
-    return redirect(f'/profile/{post.author}/')
+    if form.is_valid():
+        post = form.save(commit=False)
+        post.author = request.user
+        post.save()
+        return redirect(
+            'posts:profile', post.author
+        )
+    return render(request, template, {'form': form})
 
 
 @login_required
