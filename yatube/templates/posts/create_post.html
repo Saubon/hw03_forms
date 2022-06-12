@@ -24,12 +24,12 @@
         </div>
 
           <div class="card-body">
-            {% csrf_token %}
-              {% if is_edit %}
-                <form method="post" enctype="multipart/form-data" action="{% url 'posts:update_post' post.pk %}">
-              {% else %}
-                <form method="post" enctype="multipart/form-data" action="{% url 'posts:create_post' %}">
-              {% endif %}
+            {% if is_edit %}
+              <form method="post" enctype="multipart/form-data" action="{% url 'posts:update_post' post.pk %}">
+            {% else %}
+              <form method="post" enctype="multipart/form-data" action="{% url 'posts:create_post' %}">
+            {% endif %}
+              {% csrf_token %}
 
               {% for field in form %}
               <div class="form-group row my-3 p-3 textarea">
