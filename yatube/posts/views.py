@@ -73,7 +73,7 @@ def post_create(request):
 
 @login_required
 def post_edit(request, post_id):
-    template = 'posts/update_post.html'
+    template = 'posts/create_post.html'
     post = get_object_or_404(Post, id=post_id)
     if request.method == 'POST':
         form = PostForm(request.POST, instance=post)
@@ -82,7 +82,7 @@ def post_edit(request, post_id):
             post.group = form.cleaned_data['group']
             post.author = request.user
             post.save()
-            return redirect(f'/posts/{post_id}/')
+            return redirect('posts:post_detail', post_id)
         else:
             context = {
                 'form': form,
