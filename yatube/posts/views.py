@@ -30,6 +30,7 @@ def group_posts(request, slug):
     group = get_object_or_404(Group, slug=slug)
     posts = group.posts.all()[:10]
     context = {
+        'posts': posts,
         'group': group,
     }
     context.update(get_page_context(group.posts.all(), request))
