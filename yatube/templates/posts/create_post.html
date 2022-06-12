@@ -10,17 +10,17 @@
 
 {% load user_filters %}
 
-{% block content %} 
+{% block content %}
 <div class="container py-5">
   <div class="row justify-content-center">
     <div class="col-md-8 p-5">
       <div class="card">
-        <div class="card-header">       
+        <div class="card-header">
           {% if is_edit %}
             Сохранить запись
           {% else %}
             Добавить запись
-          {% endif %}             
+          {% endif %}
         </div>
         <div class="card-body">
         
@@ -28,7 +28,7 @@
           <form method="post" enctype="multipart/form-data" action="{% url 'posts:update_post' post.pk %}">
         {% else %}
           <form method="post" enctype="multipart/form-data" action="{% url 'posts:create_post' %}">
-        {% endif %}  
+        {% endif %}
           {% csrf_token %}
            
             {% for field in form %}
@@ -38,7 +38,7 @@
                 {% if field.field.required %}
                   <span class="required text-danger">*</span>
                 {% endif %}
-              </label>    
+              </label>
               {{ field|addclass:'form-control' }}
               {% if field.help_text %}
                 <small id="{{ field.id_for_label }}-help" class="form-text text-muted">
@@ -53,7 +53,7 @@
                   Сохранить
                 {% else %}
                   Добавить
-                {% endif %}  
+                {% endif %}
               </button>
             </div>
           </form>
