@@ -1,12 +1,9 @@
-from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
 from django.shortcuts import get_object_or_404, redirect, render
 
 from .forms import PostForm
-from .models import Group, Post
-
-User = get_user_model()
+from .models import Group, Post, User
 
 
 def get_page_context(queryset, request):
@@ -23,7 +20,7 @@ def get_page_context(queryset, request):
 def index(request):
     template = 'posts/index.html'
     context = get_page_context(
-        Post.objects.all().order_by('-pub_date'), request
+        Post.objects.all(), request
     )
     return render(request, template, context)
 
@@ -31,7 +28,7 @@ def index(request):
 def group_posts(request, slug):
     template = 'posts/group_list.html'
     group = get_object_or_404(Group, slug=slug)
-    posts = group.posts.all().order_by('-pub_date')
+    posts = group.posts.all()
     context = {
         'posts': posts,
         'group': group,
