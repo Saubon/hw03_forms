@@ -7,7 +7,7 @@
     <h1> {{ group.title }} </h1>
     <h2> {{ group.description|linebreaks }} </h2>
     <article>
-      {% for post in posts %}
+      {% for post in page_obj %}
         <ul>
           <li>
             Автор: <a href="{% url 'posts:profile' post.author %}"> {{ post.author.get_full_name }} </a>
