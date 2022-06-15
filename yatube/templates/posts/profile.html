@@ -1,28 +1,16 @@
 {% extends "base.html" %}
 
-{% block title %} 
-  Профиль пользователя 
-  {% if author.get_full_name %}
-    {{ author.get_full_name }} 
-  {% else %}
-    {{ author.username }}
-  {% endif %}
-{% endblock %}
+{% block title %} Профиль пользователя {{ author.username }} {% endblock %}
 
 {% block content %}
   <div class="container py-5">
-    <h1> Все посты пользователя 
-      {% if author.get_full_name %}
-        {{ author.get_full_name }} 
-      {% else %}
-        {{ author.username }}
-      {% endif %} </h1>
+    <h1> Все посты пользователя {{ author.username }} </h1>
     <h3> Всего постов: {{ post.author.posts.count }} </h3>
     {% for post in page_obj %}
       <article>
         <ul>
           <li>
-            Автор: <a href="{% url 'posts:profile' post.author %}"> {{ post.author.get_full_name }} </a>
+            Автор: <a href="{% url 'posts:profile' post.author %}"> {{ post.author.get_username }} </a>
           </li>
           <li>
             Дата публикации: {{ post.pub_date|date:"d E Y" }}
