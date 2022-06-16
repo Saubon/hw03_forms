@@ -8,7 +8,7 @@
     {% for post in page_obj %}
       <ul>
         <li>
-          Автор: <a href="{% url 'posts:profile' post.author %}"> {{ post.author.get_username }} </a>
+          Автор: <a href="{% url 'posts:profile' post.author.username %}"> {{ post.author.username }} </a>
         </li>
         {% if post.group %}
           <li>
@@ -17,9 +17,9 @@
         {% endif %}
         <li> Дата публикации: {{ post.pub_date|date:"d E Y" }} </li>
       </ul>
-      <p> {{ post.text|linebreaks }} </p>
+      <p> {{ post.text|linebreaks }}
         <a href="{% url 'posts:post_detail' post.pk %}"> Детали записи </a>
-      <p>
+      </p>
       {% if not forloop.last %} <hr> {% endif %}
     {% endfor %}
     {% include 'includes/paginator.html' %}

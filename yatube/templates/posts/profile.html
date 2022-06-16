@@ -10,7 +10,7 @@
       <article>
         <ul>
           <li>
-            Автор: <a href="{% url 'posts:profile' post.author %}"> {{ post.author.get_username }} </a>
+            Автор: <a href="{% url 'posts:profile' post.author.username %}"> {{ post.author.username }} </a>
           </li>
           <li>
             Дата публикации: {{ post.pub_date|date:"d E Y" }}
