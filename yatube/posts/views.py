@@ -63,11 +63,11 @@ def post_create(request):
     context = {
         'form': form,
     }
+    if not form.is_valid():
+        return render(request, template, context)
     post = form.save(commit=False)
     post.author = request.user
     post.save()
-    if not form.is_valid():
-        return render(request, template, context)
     return redirect('posts:profile', post.author)
 
 
@@ -75,15 +75,16 @@ def post_create(request):
 def post_edit(request, post_id):
     template = 'posts/create_post.html'
     post = get_object_or_404(Post, pk=post_id, author=request.user)
-    form = PostForm(
-        request.POST or None,
-        instance=post
-    )
+    if post.author != request.user:
+        return redirect('posts:post_detail', post_id=post_id)
+    form = PostForm(request.POST or None, instance=post)
+    context = {
+        'form': form,
+        'post': post,
+    }
     if form.is_valid():
         form.save()
         return redirect(
             'posts:post_detail', post_id
         )
-    return render(request, template, {
-        'form': form, 'is_edit': True, 'post': post
-    })
+    return render(request, template, context)
