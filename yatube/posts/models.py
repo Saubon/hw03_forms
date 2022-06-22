@@ -19,7 +19,9 @@ class Group(models.Model):
 
 class Post(models.Model):
     text = models.TextField(
-        blank=False, verbose_name='Описание'
+        blank=False,
+        verbose_name='Описание',
+        help_text='Введите текст'
     )
     author = models.ForeignKey(
         User,
@@ -37,7 +39,8 @@ class Post(models.Model):
         null=True,
         on_delete=models.SET_NULL,
         related_name='posts',
-        verbose_name='Группа'
+        verbose_name='Группа',
+        help_text='Введите название вашей группы'
     )
 
     class Meta:
